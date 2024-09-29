@@ -1,0 +1,105 @@
+version: 2
+
+seeds:
+    - name: amenities_changelog
+      description: Changelog of amenities available (raw data)
+      config:
+        enabled: true
+        quote_columns: false
+        column_types: {LISTING_ID: INTEGER, CHANGE_AT: TIMESTAMP_NTZ, AMENITIES: VARCHAR(16777216)}
+        tags: ["raw_data"]
+      columns:
+        - name: LISTING_ID
+          description: Unique ID for the listing to this which this row applies. Part of the Primary Key
+        - name: CHANGE_AT
+          description: When the amenities list changed
+        - name: EXTERNAL_SERVICE_ID
+          description: Array of the amenities available as of the change
+    - name: calendar
+      description: Data on availability of listings by date (raw data)
+      config:
+        enabled: true
+        quote_columns: false
+        column_types: {LISTING_ID: INTEGER, DATE: DATE, AVAILABLE: VARCHAR(128), RESERVATION_ID: INTEGER, PRICE: VARCHAR(128), MINIMUM_NIGHTS: INTEGER, MAXIMUM_NIGHTS: INTEGER}
+        tags: ["raw_data"]
+      columns:
+        - name: LISTING_ID
+          description: Unique ID for the listing to this which this row applies. Part of the Primary Key
+        - name: DATE
+          description: Date of availability this row describes. Part of the Primary Key
+        - name: AVAILABLE
+          description: Contains `t` if this property is available on this date. Contains `f` if not.
+        - name: RESERVATION_ID
+          description: Unique ID for that DATE's reservation. Foreign key. If NULL, there was no reservation on that date.
+        - name: PRICE
+          description: The USD price to rent this property on DATE.
+        - name: MINIMUM_NIGHTS
+          description: The minimum number of nights that must be booked consecutively for this property.
+        - name: MAXIMUM_NIGHTS
+          description: The maximum number of nights that may be booked consecutively for this property.
+    - name: generated_reviews
+      description: Reviews for listings (raw data)
+      config:
+        enabled: true
+        quote_columns: false
+        column_types: {ID: INTEGER, LISTING_ID: INTEGER, REVIEW_SCORE: INTEGER, REVIEW_DATE: DATE}
+        tags: ["raw_data"]
+      columns:
+        - name: ID
+          description: Auto-incrementing ID for the dummy reviews data
+        - name: LISTING_ID
+          description: Unique ID for the listing to this which this row applies
+        - name: REVIEW_SCORE
+          description:  Generated score of the review, integer 1 to 5
+        - name: REVIEW_DATE
+          description:  Generated date of the review
+    - name: listings
+      description: Listings info (raw data)
+      config:
+        enabled: true
+        quote_columns: false
+        column_types: {ID: INTEGER, NAME: VARCHAR(128), HOST_ID: INTEGER, HOST_NAME: VARCHAR(128), HOST_SINCE: TIMESTAMP_NTZ, HOST_LOCATION: VARCHAR(128), HOST_VERIFICATIONS: VARCHAR(16777216),
+                      NEIGHBORHOOD: VARCHAR(128), PROPERTY_TYPE: VARCHAR(128), ROOM_TYPE: VARCHAR(128), ACCOMMODATES: INTEGER, BATHROOMS_TEXT: VARCHAR(128), BEDROOMS: VARCHAR(128),
+                      BEDS: INTEGER, AMENITIES: VARCHAR(16777216), PRICE: VARCHAR(128), NUMBER_OF_REVIEWS: INTEGER, FIRST_REVIEW: DATE, LAST_REVIEW: DATE, REVIEW_SCORES_RATING: VARCHAR(128)}
+        tags: ["raw_data"]
+      columns:
+        - name: ID
+          description: Unique ID for this listing. Primary Key.
+        - name: NAME
+          description: Display name of listing.
+        - name: HOST_ID
+          description: Unique ID for the Host who owns this.
+        - name: HOST_NAME
+          description:  Display name of Host.
+        - name: HOST_SINCE
+          description: When the Host signed up.
+        - name: HOST_LOCATION
+          description: Where the Host is based.
+        - name: HOST_VERIFICATIONS
+          description: (Parseable as JSON) Array of methods the Host can use to verify.
+        - name: NEIGHBORHOOD
+          description: The neighborhood where this listing is located.
+        - name: PROPERTY_TYPE
+          description: Description of the type of property.
+        - name: ROOM_TYPE
+          description: Description of the type of room.
+        - name: ACCOMMODATES
+          description: Number of guests this room can accommodate.
+        - name: BATHROOMS_TEXT
+          description:  Number and types of bathrooms available.
+        - name: BEDROOMS
+          description: Number of bedrooms available for use.
+        - name: BEDS
+          description: Number of beds available for use.
+        - name: AMENITIES
+          description: (Parseable as JSON) Array of amenities available for guests.
+        - name: PRICE
+          description: The price of this listing as of the start of the date range in CALENDAR.
+        - name: NUMBER_OF_REVIEWS
+          description: The number of reviews this listing has ever received.
+        - name: FIRST_REVIEW
+          description: The date of the first review this listing received.
+        - name: LAST_REVIEW
+          description:  The date of the most recent review this listing received.
+        - name: REVIEW_SCORES_RATING
+          description: The average review score of this listing.
