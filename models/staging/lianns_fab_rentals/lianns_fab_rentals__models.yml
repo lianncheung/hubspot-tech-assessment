@@ -14,7 +14,7 @@ models:
         description: Date when the amenities list changed
       - name: amenities
         description: Array of the amenities available as of the change (cast as json)
-  - name: stg_lianns_fab_rentals__amenities_calendar
+  - name: stg_lianns_fab_rentals__calendar
     description: Data on availability of listings by date (staging view)
     docs:
       show: true
