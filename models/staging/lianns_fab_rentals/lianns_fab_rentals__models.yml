@@ -5,6 +5,11 @@ models:
     description: Changelog of amenities available (staging view)
     docs:
       show: true
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - listing_id
+            - change_at_timestamp
     columns:
       - name: listing_id
         description: Unique ID for the listing to this which this row applies. Part of the Primary Key
@@ -18,6 +23,11 @@ models:
     description: Data on availability of listings by date (staging view)
     docs:
       show: true
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - listing_id
+            - calendar_date
     columns:
       - name: listing_id
         description: Unique ID for the listing to this which this row applies. Part of the Primary Key
@@ -40,6 +50,8 @@ models:
     columns:
       - name: id
         description: Auto-incrementing ID for the dummy reviews data
+        tests:
+          - unique
       - name: listing_id
         description: Unique ID for the listing to this which this row applies
       - name: review_score
@@ -53,6 +65,9 @@ models:
     columns:
       - name: id
         description: Unique ID for this listing. Primary Key.
+        tests:
+          - unique
+          - not_null
       - name: listing_name
         description: Display name of listing.
       - name: host_id
