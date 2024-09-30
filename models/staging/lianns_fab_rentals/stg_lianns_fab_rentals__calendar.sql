@@ -21,6 +21,13 @@ renamed as (
 
         reservation_id,
         cast(price as float) as price_usd,
+
+        -- when listing is booked, then price should equal revenue for that date
+        case
+            when reservation_id is not null then cast(price as float)
+            else 0
+        end as revenue_usd,
+
         minimum_nights,
         maximum_nights
 

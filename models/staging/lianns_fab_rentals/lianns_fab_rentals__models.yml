@@ -39,6 +39,8 @@ models:
         description: Unique ID for that DATE's reservation. Foreign key. If NULL, there was no reservation on that date.
       - name: price_usd
         description: The USD price to rent this property on DATE.
+      - name: revenue_usd
+        description: The USD revenue for this property on DATE; when listing is booked, then price = revenue for that date.
       - name: minimum_nights
         description: The minimum number of nights that must be booked consecutively for this property.
       - name: maximum_nights
