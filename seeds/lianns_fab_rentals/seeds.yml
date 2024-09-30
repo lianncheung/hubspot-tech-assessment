@@ -4,7 +4,7 @@ seeds:
     - name: amenities_changelog
       description: Changelog of amenities available (raw data)
       config:
-        enabled: true
+        enabled: false
         quote_columns: false
         column_types: {LISTING_ID: INTEGER, CHANGE_AT: TIMESTAMP_NTZ, AMENITIES: VARCHAR(16777216)}
         tags: ["raw_data"]
@@ -18,7 +18,7 @@ seeds:
     - name: calendar
       description: Data on availability of listings by date (raw data)
       config:
-        enabled: true
+        enabled: false
         quote_columns: false
         column_types: {LISTING_ID: INTEGER, DATE: DATE, AVAILABLE: VARCHAR(128), RESERVATION_ID: INTEGER, PRICE: VARCHAR(128), MINIMUM_NIGHTS: INTEGER, MAXIMUM_NIGHTS: INTEGER}
         tags: ["raw_data"]
@@ -40,7 +40,7 @@ seeds:
     - name: generated_reviews
       description: Reviews for listings (raw data)
       config:
-        enabled: true
+        enabled: false
         quote_columns: false
         column_types: {ID: INTEGER, LISTING_ID: INTEGER, REVIEW_SCORE: INTEGER, REVIEW_DATE: DATE}
         tags: ["raw_data"]
@@ -54,9 +54,9 @@ seeds:
         - name: REVIEW_DATE
           description:  Generated date of the review
     - name: listings
-      description: Listings info (raw data)
+      description: Property, host, and rating information for all listings (raw data)
       config:
-        enabled: true
+        enabled: false
         quote_columns: false
         column_types: {ID: INTEGER, NAME: VARCHAR(128), HOST_ID: INTEGER, HOST_NAME: VARCHAR(128), HOST_SINCE: TIMESTAMP_NTZ, HOST_LOCATION: VARCHAR(128), HOST_VERIFICATIONS: VARCHAR(16777216),
                       NEIGHBORHOOD: VARCHAR(128), PROPERTY_TYPE: VARCHAR(128), ROOM_TYPE: VARCHAR(128), ACCOMMODATES: INTEGER, BATHROOMS_TEXT: VARCHAR(128), BEDROOMS: VARCHAR(128),

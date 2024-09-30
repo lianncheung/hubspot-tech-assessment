@@ -1,0 +1,16 @@
+version: 2
+
+sources:
+  - name: lianns_fab_rentals
+    description: "Raw data from the Liann's Fab Rentals data source"
+    database: hubspot_tech_assessment
+    schema: lianns_fab_rentals
+    tables:
+      - name: amenities_changelog
+        description: Changelog of amenities available
+      - name: calendar
+        description: Data on availability of listings by date
+      - name: generated_reviews
+        description: Reviews for listings
+      - name: listings
+        description: Property, host, and rating information for all listings
