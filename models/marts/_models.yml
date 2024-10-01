@@ -1,0 +1,69 @@
+version: 2
+
+models:
+  - name: listings
+    description: Listing data mart - contains point in time data (day grain)
+    docs:
+      show: true
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - listing_id
+            - calendar_date
+    columns:
+      - name: listing_id
+        description: Unique ID for the listing to this which this row applies. Part of the Primary Key (with calendar date)
+      - name: calendar_date
+        description: Day time grain for the table. Part of the Primary Key (with listing_id)
+      - name: listing_name
+        description: Date when the amenities list changed
+      - name: host_id
+        description: Unique ID for the Host who owns this listing.
+      - name: host_name
+        description: Display name of Host.
+      - name: host_since_date
+        description: Date when the Host signed up.
+      - name: host_location
+        description: Where the Host is based.
+      - name: host_verifications
+        description: Array of methods the Host can use to verify (cast as json)
+      - name: neighborhood
+        description: The neighborhood where this listing is located.
+      - name: property_type
+        description: Description of the type of property.
+      - name: room_type
+        description: Description of the type of room.
+      - name: accommodates
+        description: Number of guests this room can accommodate.
+      - name: bathrooms_text
+        description: Number and types of bathrooms available.
+      - name: bathrooms
+        description: Number of bathrooms available.
+      - name: bedrooms
+        description: Number of bedrooms available for use.
+      - name: beds
+        description: Number of beds available for use.
+      - name: amenities
+        description: Array of amenities available for guests (json) as of the calendar date.
+      - name: rolling_avg_review_score
+        description: Avg review score as of the calendar date.
+      - name: rolling_total_reviews
+        description: Total number of reviews as of the calendar date.
+      - name: first_review_date
+        description: First review date for the listing (as of the calendar date)
+      - name: last_review_date
+        description: Last review date for the listing (as of the calendar date)
+      - name: is_available
+        description: Boolean - true is property is available; false if not available
+      - name: reservation_id
+        description: Unique ID for that DATE's reservation. Foreign key. If NULL, there was no reservation on that date.
+      - name: price_usd
+        description: The USD price to rent this property on DATE.
+      - name: revenue_usd
+        description: The USD revenue for this property on DATE; when listing is booked, then price = revenue for that date.
+      - name: minimum_nights
+        description: The minimum number of nights that must be booked consecutively for this property.
+      - name: maximum_nights
+        description: The maximum number of nights that may be booked consecutively for this property.
+      - name: duration_available_if_stay_end_date
+        description: The maximum duration the rental is available (if available = true) as of the calendar date, if the date = stay end date.
