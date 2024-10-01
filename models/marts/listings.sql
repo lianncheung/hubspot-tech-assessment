@@ -51,11 +51,9 @@ listings_and_calendar_and_amenities_and_reviews_joined as (
         -- get amenities data from int_amenities_scd in case there were changes over the calendar timeframe
         amenities.amenities,
 
-        -- get rolling review score avg from int_reviews_rolling_avg in case there were changes over the calendar timeframe
+        -- get rolling review aggregates from int_reviews_aggregated in case there were changes over the calendar timeframe
         reviews.rolling_avg_review_score,
-    
-        -- get review totals and min/max dates
-        reviews.total_reviews,
+        reviews.rolling_total_reviews,
         reviews.first_review_date,
         reviews.last_review_date,
 
@@ -79,7 +77,7 @@ listings_and_calendar_and_amenities_and_reviews_joined as (
 
     left join reviews
         on calendar.listing_id = reviews.listing_id
-        and calendar.calendar_date between reviews.review_rolling_avg_start_date and coalesce(reviews.review_rolling_avg_end_date, current_date)
+        and calendar.calendar_date between reviews.review_aggregates_start_date and coalesce(reviews.review_aggregates_end_date, current_date)
 )
 
 select * from listings_and_calendar_and_amenities_and_reviews_joined
