@@ -32,6 +32,7 @@ available_dates as (
 )
 
 , maximum_availability_setup as (
+
     select
 
         available_dates.listing_id,
@@ -43,8 +44,10 @@ available_dates as (
     from available_dates
     left join not_available_dates
         on available_dates.listing_id = not_available_dates.listing_id
+        -- take first non-available date after calendar date
         and available_dates.calendar_date < not_available_dates.calendar_date
     {{ dbt_utils.group_by(n=4) }}
+
 )
 
 select 
@@ -58,7 +61,7 @@ select
     calendar.minimum_nights,
     calendar.maximum_nights,
 
-    -- if rental is available, take calculate the difference between the current date and next non-available date (either because booked or end date)
+    -- if rental is available, take calculate the difference between the calendar date and next non-available date (either because booked or end of the calendar)
     datediff('day', calendar.calendar_date, coalesce(first_non_available_date_after_date, last_available_day_plus_one)) as maximum_availablity_starting_calendar_date
 
 from calendar
