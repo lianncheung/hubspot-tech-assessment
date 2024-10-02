@@ -65,5 +65,5 @@ models:
         description: The minimum number of nights that must be booked consecutively for this property.
       - name: maximum_nights
         description: The maximum number of nights that may be booked consecutively for this property.
-      - name: duration_available_if_stay_end_date
-        description: The maximum duration the rental is available (if available = true) as of the calendar date, if the date = stay end date.
+      - name: maximum_availablity_starting_calendar_date
+        description: The maximum duration the rental is available (if available = true) starting the given calendar date.
