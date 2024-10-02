@@ -1,7 +1,7 @@
 version: 2
 
 models:
-  - name: listings
+  - name: listings_by_day
     description: Listing data mart - contains point in time data (day grain)
     docs:
       show: true
