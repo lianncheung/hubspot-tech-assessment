@@ -12,9 +12,9 @@ select
     coalesce(
         max(
             case
-                when duration_available_if_stay_end_date >= minimum_nights
-                    and duration_available_if_stay_end_date <= maximum_nights
-                then duration_available_if_stay_end_date
+                when maximum_availablity_starting_calendar_date >= minimum_nights
+                    and maximum_availablity_starting_calendar_date <= maximum_nights
+                then maximum_availablity_starting_calendar_date
             end
             ), 0) as longest_stay_available
 

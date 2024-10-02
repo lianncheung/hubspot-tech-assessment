@@ -2,7 +2,7 @@ with
 
 calendar as (
 
-    select * from {{ ref('int_calendar_windowed_by_day' )}}
+    select * from {{ ref('int_calendar_availability' )}}
 
 ),
 
@@ -64,7 +64,7 @@ listings_and_calendar_and_amenities_and_reviews_joined as (
         calendar.revenue_usd,
         calendar.minimum_nights,
         calendar.maximum_nights,
-        calendar.duration_available_if_stay_end_date
+        calendar.maximum_availablity_starting_calendar_date
 
     from calendar
 
